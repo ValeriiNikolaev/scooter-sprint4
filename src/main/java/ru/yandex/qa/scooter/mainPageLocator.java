@@ -48,17 +48,17 @@ public class mainPageLocator {
         return driver.findElement(answer).getText();
     }
 
-    public void clickFirstOrderButton(){
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(firstOrderButton));
-        new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(firstOrderButton));
-        driver.findElement(firstOrderButton).click();
+    public void clickOrderButton(String orderButtons){
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(By.xpath(orderButtons)));
+        new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(By.xpath(orderButtons)));
+        driver.findElement(By.xpath(orderButtons)).click();
     }
 
-    public void clickSecondOrderButton(){
+    /*public void clickSecondOrderButton(){
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(secondOrderButton));
         new WebDriverWait(driver, 2).until(ExpectedConditions.elementToBeClickable(secondOrderButton));
         driver.findElement(secondOrderButton).click();
     }
-
+    */
 }
 

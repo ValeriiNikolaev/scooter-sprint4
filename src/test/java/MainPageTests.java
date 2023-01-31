@@ -8,12 +8,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.yandex.qa.scooter.mainPageLocator;
 
 @RunWith(Parameterized.class)
-public class mainPageTests {
+public class MainPageTests {
     private WebDriver driver;
     private final int questNumber;
     private final String expectedAnswer;
 
-    public mainPageTests(int questNumber, String expectedAnswer){
+    public MainPageTests(int questNumber, String expectedAnswer){
         this.questNumber = questNumber;
         this.expectedAnswer = expectedAnswer;
     }

@@ -81,8 +81,8 @@ public class orderPageLocator {
         driver.findElement(nextButton).click();
     }
 
-    public void dateOfSubmission(String rentdate){
-        driver.findElement(dateOfSubmission).sendKeys(rentdate);
+    public void dateOfSubmission(String rentDate){
+        driver.findElement(dateOfSubmission).sendKeys(rentDate);
     }
 
     public void selectRentDuration(int duration){

@@ -11,7 +11,7 @@ import ru.yandex.qa.scooter.orderPageLocator;
 
 
 @RunWith(Parameterized.class)
-public class orderTests {
+public class OrderTests {
 
     private WebDriver driver;
     private final String name;
@@ -23,8 +23,10 @@ public class orderTests {
     private final int duration;
     private final String color;
     private final String comment;
+    private  final  String orderButtons;
 
-    public orderTests(String name, String surname, String address, String stationMetro, String phone, String rentDate, int duration, String color, String comment){
+    public OrderTests(String orderButtons, String name, String surname, String address, String stationMetro, String phone, String rentDate, int duration, String color, String comment){
+        this.orderButtons = orderButtons;
         this.name = name;
         this.surname = surname;
         this.address = address;
@@ -37,9 +39,9 @@ public class orderTests {
     }
     @Parameterized.Parameters
     public static Object[][] userData() {
-        return new Object[][] {
-                {"Марина", "Чайкина", "Тайланд на море", "Митино", "88007775556", "02.02.2023", 4, "black", "упал, ничего стращного"},
-                {"Колобок", "Сказочный", "Сингапур чайна таун", "Чистые пруды", "+79095057889", "06.02.2023", 2, "grey", "тили траливали"},
+        return new Object[][]  {
+                {".//button[@class='Button_Button__ra12g']", "Марина", "Чайкина", "Тайланд на море", "Митино", "88007775556", "02.02.2023", 4, "black", "упал, ничего стращного"},
+                {".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']", "Колобок", "Сказочный", "Сингапур чайна таун", "Чистые пруды", "+79095057889", "06.02.2023", 2, "grey", "тили траливали"},
         };
     }
     @Before
@@ -53,23 +55,7 @@ public class orderTests {
     public void orderFirstButtonTest() {
         mainPageLocator objMainPage = new mainPageLocator(driver);
         orderPageLocator objOrderPage = new orderPageLocator(driver);
-        objMainPage.clickFirstOrderButton();
-        objOrderPage.fillUserDetailsForm(name, surname, address, stationMetro, phone);
-        objOrderPage.clickNextButton();
-        Assert.assertTrue(objOrderPage.checkRentFormIsDisplayed());
-        objOrderPage.fillRentForm(rentDate, duration, color, comment);
-        objOrderPage.clickConfirmOrderButton();
-        objOrderPage.clickYesConfirmOrderButton();
-        Assert.assertTrue(objOrderPage.checkOrderSuccessIsDisplayed());
-
-    }
-
-    @Test
-    public void orderSecondButtonTest(){
-        mainPageLocator objMainPage = new mainPageLocator(driver);
-        orderPageLocator objOrderPage = new orderPageLocator(driver);
-
-        objMainPage.clickSecondOrderButton();
+        objMainPage.clickOrderButton(orderButtons);
         objOrderPage.fillUserDetailsForm(name, surname, address, stationMetro, phone);
         objOrderPage.clickNextButton();
         Assert.assertTrue(objOrderPage.checkRentFormIsDisplayed());
@@ -78,6 +64,7 @@ public class orderTests {
         objOrderPage.clickYesConfirmOrderButton();
         Assert.assertTrue(objOrderPage.checkOrderSuccessIsDisplayed());
     }
+
 
     @After
     public void closeWeb(){
